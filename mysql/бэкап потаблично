@@ -1,0 +1,23 @@
+#!/bin/bush
+
+echo "Enter password for mysqldump:"
+read -s pass 
+
+echo "STOP SLAVE;" | mysql -uroot -p$pass
+
+MYSQL='mysql -uroot -p  --skip-column-names'
+
+for s in mysql `$MYSQL -e "SHOW DATABASES LIKE '%\_db'"`;
+        do
+	mkdir $s;
+        for t in `$MYSQL -e "SHOW TABLES FROM $s"`;
+        	do
+		mkdir $s/$t;
+        	/usr/bin/mysqldump -uroot -p$pass --source-data=2 --add-drop-table --add-locks --create-options --disable-keys --extended-insert --single-transaction --quick --set-charset --events --routines --triggers $s $t | gzip -1 > $s/$t/$t.gz;
+
+	done
+
+done
+
+echo "START SLAVE;" | mysql -uroot -p$pass
+

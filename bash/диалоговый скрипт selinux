@@ -1,0 +1,88 @@
+#!/bin/bash
+
+echo "Only root user can use this program. Do you want to continue? (y/n)"
+read uroot
+if [[ $uroot == y ]]
+then
+	root=$( id -u )
+	if [[ $root == 0 ]]
+	then
+		mode=$( getenforce )
+
+		if [[ $mode == Enforcing ]]
+		then
+			echo "SELinux current mode now "Enforcing""
+			echo "Do you want to change current mode? (y/n). (You can skip this step and we go to next)"
+			read uamode1
+			if [[ $uamode1 == y ]]
+			then
+				setenforce 0
+				echo "SELinux current mode now "Permissive""
+			elif [[ $uamode1 != y ]]
+			then
+				echo "Do you want to disabled SELinux? (y/n). (You can skip this step and we go to next)"
+				read status2
+				if [[ $status2 == y ]]
+				then
+					sed -i "s/=enforcing/=disabled/" /etc/selinux/config
+					echo "For the changes to take effect you need to reboot your system. Do yo want to continue? (y/n). (You can skip this step and we go to next)"
+					read uastatus2
+					if [[ $uastatus2 == y ]]
+					then
+						echo "Your system wil be reboot now."
+						shutdown -r now
+					fi
+				fi
+		
+			fi
+		elif [[ $mode == Permissive ]]
+		then
+			echo "SELinux current mode now "Permissive""
+			echo "Do you want to change current mode? (y/n). (You can skip this step and we go to next)"
+			read uamode2
+			if [[ $uamode2 == y ]]
+			then
+				setenforce 1
+				echo "SELinux current mode now "Enforcing""
+			elif [[ $uamode2 != y ]]
+			then
+				echo "Do you want to enabled SELinux in config? (y/n). (You can skip this step and we go to next)"
+				read status4
+				if [[ $status4 == y ]]
+				then
+					sed -i "s/=permissive/=enforcing/" /etc/selinux/config
+					echo "For the changes to take effect you need to reboot your system. Do yo want to continue? (y/n). (You can skip this step and we go to next)"
+					read uastatus4
+					if [[ $uastatus4 == y ]]
+					then
+						echo "Your system wil be reboot now."
+						shutdown -r now
+					fi
+				fi
+	
+			
+			fi	
+		elif [[ $mode == Disabled ]]
+		then
+			echo "SELinux current status now "Disabled""
+			echo "Do you want to change current status? (y/n). (You can skip this step and we go to next)"
+			read status1
+			if [[ $status1 == y ]]
+			then
+				sed -i "s/=disabled/=enforcing/" /etc/selinux/config
+				echo "For the changes to take effect you need to reboot your system. Do yo want to continue? (y/n). (You can skip this step and we go to next)"
+				read uastatus1
+				if [[ $uastatus1 == y ]]
+				then
+					echo "Your system wil be reboot now."
+					shutdown -r now
+				fi
+			fi
+		
+		fi
+	elif [[ $root != 0 ]]
+	then 
+		exit
+	fi
+fi
+echo "Have a nice day!"
