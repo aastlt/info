@@ -85,7 +85,11 @@ iptables -A TCP -p tcp --dport 53 -j ACCEPT
 iptables -A UDP -p udp --dport 53 -j ACCEPT 
 
 
-
+Затем сбросьте таблицы nat и mangle, сбросьте все цепочки (флаг –F) и удалите все нестандартные цепочки правил (-X)
+sudo iptables -t nat -F
+sudo iptables -t mangle -F
+sudo iptables -F
+sudo iptables -X
 
 
 
