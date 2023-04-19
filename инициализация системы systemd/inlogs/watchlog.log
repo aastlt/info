@@ -1,0 +1,22 @@
+мар 20 17:55:39 1st systemd[1065]: Reached target Timers.
+мар 20 17:55:39 1st systemd[1065]: Starting D-Bus User Message Bus Socket.
+мар 20 17:55:39 1st systemd[1065]: Listening on GnuPG network certificate management daemon.
+мар 20 17:55:39 1st systemd[1065]: Listening on GnuPG cryptographic agent and passphrase cache (access for web browsers).
+мар 20 17:55:39 1st systemd[1065]: Listening on GnuPG cryptographic agent and passphrase cache (restricted).
+мар 20 17:55:39 1st systemd[1065]: Listening on GnuPG cryptographic agent (ssh-agent emulation).
+мар 20 17:55:39 1st systemd[1065]: Listening on GnuPG cryptographic agent and passphrase cache.
+мар 20 17:55:39 1st systemd[1065]: Listening on Multimedia System.
+мар 20 17:55:39 1st systemd[1065]: Listening on debconf communication socket.
+мар 20 17:55:39 1st systemd[1065]: Listening on Sound System.
+мар 20 17:55:39 1st systemd[1065]: Listening on D-Bus User Message Bus Socket.
+мар 20 17:55:39 1st systemd[1065]: Reached target Sockets.
+мар 20 17:55:39 1st systemd[1065]: Reached target Basic System.
+мар 20 17:55:39 1st systemd[1065]: Started Multimedia Service.
+мар 20 17:55:39 1st systemd[1065]: Starting Sound Service...
+мар 20 17:55:39 1st systemd[1065]: Starting Tracker metadata extractor...
+мар 20 17:55:39 1st systemd[1065]: Starting Tracker file system data miner...
+мар 20 17:55:39 1st tracker-miner-f[1083]: Set scheduler policy to SCHED_IDLE
+мар 20 17:55:39 1st tracker-miner-f[1083]: ALERT Setting priority nice level to 19
+мар 20 17:55:39 1st tracker-extract[1082]: Set scheduler policy to SCHED_IDLE
+мар 20 17:55:39 1st tracker-extract[1082]: Setting priority nice level to 19
+

@@ -52,6 +52,51 @@ lvconvert --type cache pool/01 --cache-pool pool/cache # включим кэши
 lvs
 lvconvert --uncache pool/01 #отключить кэширование
 
+#LVM Thin Pool Provision
+nano /etc/lvm/lvm.conf #для автоматического расширения пула изменить параметры на thin_pool_autoextend_threshold = 70 и thin_pool_autoextend_percent = 20
+vgcreate vg0 /dev/sdb #создание VG
+lvcreate vg0 -n thin-pool -T -l+100%FREE #создание thin-пула для thin-томов
+lvcreate -T -V 8G /dev/vg0/thin-pool -n thin-vl #создание thin-lv 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
