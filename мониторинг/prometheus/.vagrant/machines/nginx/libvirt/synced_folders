@@ -1,0 +1,1 @@
+{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"/home/aastlt/1st/info/мониторинг/prometheus","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}

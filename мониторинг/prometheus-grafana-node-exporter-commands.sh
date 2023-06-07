@@ -65,13 +65,94 @@ https://grafana.com/grafana/dashboards/ # поиск дашбордов, ище�
 Выбрали нужный - Copy ID
 Заходим в Grafana - Dashboards - Import
 
-
-
-
-
-
-
 # При создании скрипта по установке, можно закончить удалением временных файлов и папок, оставив лишь файлы конфигурации
+
+# Установка AlertManager
+wget https://github.com/prometheus/alertmanager/releases/download/v0.25.0/alertmanager-0.25.0.linux-amd64.tar.gz
+tar zxf alertmanager-0.25.0.linux-amd64.tar.gz
+useradd --no-create-home --shell /bin/false alertmanager
+usermod --home /var/lib/alertmanager alertmanager
+mkdir /etc/alertmanager
+mkdir /var/lib/alertmanager
+mkdir /var/lib/prometheus/alertmanager
+
+cp alertmanager-0.25.0.linux-amd64/amtool /usr/local/bin/
+cp alertmanager-0.25.0.linux-amd64/alertmanager /usr/local/bin/
+cp alertmanager-0.25.0.linux-amd64/alertmanager.yml /etc/alertmanager/
+chown -R alertmanager:alertmanager /etc/alertmanager /var/lib/alertmanager
+chown alertmanager:alertmanager /usr/local/bin/{alertmanager,amtool}
+echo "ALERTMANAGER_OPTS=\"\"" > /etc/default/alertmanager
+chown alertmanager:alertmanager /etc/default/alertmanager
+chown -R alertmanager:alertmanager /var/lib/prometheus/alertmanager
+
+nano /etc/systemd/system/alertmanager.service
+
+systemctl daemon-reload
+systemctl start alertmanager
+
+nano /etc/prometheus/rules.yml
+/usr/local/bin/promtool check rules /etc/prometheus/rules.yml
+
+nano /etc/prometheus/prometheus.yml #добавим в конце
+#rule_files:
+#  - "rules.yml"
+#alerting:
+#  alertmanagers:
+#    - static_configs:
+#      - targets:
+#        - localhost:9093
+
+systemctl restart prometheus
+systemctl restart alertmanager
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
